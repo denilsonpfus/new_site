@@ -27,6 +27,18 @@ node {
         }
     }
 
+    stage ('Launch docker containers') {
+      try {
+      // Start Jekyll container here
+           sh "docker run -v /home/denferreira/denilson_blog:/data --name denilson_blog${env.BUILD_NUMBER} denilsonpfus/jekyll" 
+      
+      } catch (error) {
+      } finally {
+      // Stop and remove database container here
+      //sh 'docker-compose stop db'
+      //sh 'docker-compose rm db'
+        }
+    }
 /*    stage('Push image') {
  *       /* Finally, we'll push the image with two tags:
  *        * First, the incremental build number from Jenkins
