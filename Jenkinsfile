@@ -7,7 +7,7 @@ node {
         checkout scm
     }
 
-    stage('Build image') {
+    stage('Build docker images') {
         /* This builds the actual jekyll image; synonymous to
          * docker build on the command line */
       dir('jekyll') {
@@ -18,7 +18,7 @@ node {
       }    
     }
         
-    stage('Test image') {
+    stage('Test docker images') {
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
 
