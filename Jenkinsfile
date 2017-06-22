@@ -8,12 +8,16 @@ node {
     }
 
     stage('Build image') {
-        /* This builds the actual image; synonymous to
+        /* This builds the actual jekyll image; synonymous to
          * docker build on the command line */
-
-        app = docker.build("denilsonpfus/jekyll")
+      dir('jekyll') {
+        app = docker.build("denilsonpfus/jekyll:${env.BUILD_NUMBER}")
+      }
+      dir('apache') {
+        app = docker.build("denilsonpfus/apache:${env.BUILD_NUMBER}")
+      }    
     }
-
+        
     stage('Test image') {
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
