@@ -29,10 +29,10 @@ node {
 
     stage ('Launch docker containers') {
       try {
-      // Start Jekyll container here
+      // Lauch Jekyll container here
            sh "docker run -v /home/denferreira/denilson_blog:/data --name denilson_blog${env.BUILD_NUMBER} denilsonpfus/jekyll" 
-      // Start Apache container here
-           sh "docker run -d -P --volumes-from denilson_blog${env.BUILD_NUMBER} denilsonpfus/apache" 
+      // Lauch Apache container here
+           sh "docker run -d -P --volumes-from denilson_blog${env.BUILD_NUMBER} --name apache_server${env.BUILD_NUMBER} denilsonpfus/apache"
       
       } catch (error) {
       } finally {
@@ -41,7 +41,28 @@ node {
       //sh 'docker-compose rm db'
         }
     }
-/*    stage('Push image') {
+
+/*    
+    stage ('Test application') {
+      try {
+      // Start Jekyll container here
+           sh "docker run -v /home/denferreira/denilson_blog:/data --name denilson_blog${env.BUILD_NUMBER} denilsonpfus/jekyll" 
+      // Start Apache container here
+           sh "docker run -d -P --volumes-from denilson_blog${env.BUILD_NUMBER} --name apache_server${env.BUILD_NUMBER} denilsonpfus/apache" 
+      
+      } catch (error) {
+      } finally {
+      // Stop and remove database container here
+      //sh 'docker-compose stop db'
+      //sh 'docker-compose rm db'
+        }
+    }
+*/
+    
+    
+    
+    
+    /*    stage('Push image') {
  *       /* Finally, we'll push the image with two tags:
  *        * First, the incremental build number from Jenkins
  *        * Second, the 'latest' tag.
