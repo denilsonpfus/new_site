@@ -10,5 +10,5 @@ ENV REFRESHED_AT 2017-06-23 02:37
 
 VOLUME /data
 VOLUME /var/www/html
-WORKDIR /var/www/html
+WORKDIR /data
 
