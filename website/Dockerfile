@@ -5,7 +5,12 @@ VOLUME /data
 VOLUME /var/www/html
 WORKDIR /data
 
+RUN apt-get -yqq update
+RUN apt-get -yqq install nodejs
+
 ADD https://github.com/denilsonpfus/new_site/blob/master/archive.html https://github.com/denilsonpfus/new_site/blob/master/categories.html \
 https://github.com/denilsonpfus/new_site/blob/master/pages.html https://github.com/denilsonpfus/new_site/blob/master/Index.html \
 https://github.com/denilsonpfus/new_site/blob/master/tags.html https://github.com/denilsonpfus/new_site/blob/master/bootstrap.css \
 https://github.com/denilsonpfus/new_site/blob/master/bootstrap.js ./
+
+ENTRYPOINT ["--destination=/var/www/html" ]
