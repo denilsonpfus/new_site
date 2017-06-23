@@ -31,7 +31,7 @@ node {
       // Lauch website container here
            sh "docker run -d --name new_site${env.BUILD_NUMBER} denilsonpfus/website:${env.BUILD_NUMBER}" 
       // Lauch Apache container here
-           sh "docker run -d --name apache_server${env.BUILD_NUMBER} denilsonpfus/apache_server:${env.BUILD_NUMBER}"
+          sh "docker run -d -P --volumes-from new_sites${env.BUILD_NUMBER} --name apache_server${env.BUILD_NUMBER} denilsonpfus/apache_server:${env.BUILD_NUMBER}"
       
       // Lauch website container here
       //     sh "docker run -v /home/denferreira/new_site:/data/ --name new_site${env.BUILD_NUMBER} denilsonpfus/website:${env.BUILD_NUMBER}”
