@@ -7,6 +7,6 @@ https://github.com/denilsonpfus/new_site/blob/master/pages.html https://github.c
 https://github.com/denilsonpfus/new_site/blob/master/tags.html https://github.com/denilsonpfus/new_site/blob/master/bootstrap.css \
 https://github.com/denilsonpfus/new_site/blob/master/bootstrap.js ./var/www/html/
 
-VOLUME /data
 VOLUME /var/www/html
+WORKDIR /var/www/html
 
