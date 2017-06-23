@@ -13,7 +13,7 @@ node {
         app = docker.build("denilsonpfus/website:${env.BUILD_NUMBER}")
       }
       dir('apache') {
-        app = docker.build("denilsonpfus/apache:${env.BUILD_NUMBER}")
+        app = docker.build("denilsonpfus/apache_server:${env.BUILD_NUMBER}")
       }    
     }
         
@@ -31,7 +31,7 @@ node {
       // Lauch Jekyll container here
            sh "docker run -v /home/denferreira/denilson_new_site:/data --name new_site${env.BUILD_NUMBER} denilsonpfus/website:${env.BUILD_NUMBER}" 
       // Lauch Apache container here
-           sh "docker run -d -P --volumes-from new_site${env.BUILD_NUMBER} --name apache_server${env.BUILD_NUMBER} denilsonpfus/apache:${env.BUILD_NUMBER}"
+           sh "docker run -d -P --volumes-from new_site${env.BUILD_NUMBER} --name apache_server${env.BUILD_NUMBER} denilsonpfus/apache_server:${env.BUILD_NUMBER}"
       
       // Lauch website container here
       //     sh "docker run -v /home/denferreira/new_site:/data/ --name new_site${env.BUILD_NUMBER} denilsonpfus/website:${env.BUILD_NUMBER}”
