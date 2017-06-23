@@ -8,10 +8,9 @@ node {
     }
 
     stage('Build docker images') {
-        /* This builds the actual jekyll image; synonymous to
-         * docker build on the command line */
-      dir('jekyll') {
-        app = docker.build("denilsonpfus/jekyll:${env.BUILD_NUMBER}")
+  
+      dir(‘website’) {
+        app = docker.build("denilsonpfus/website:${env.BUILD_NUMBER}")
       }
       dir('apache') {
         app = docker.build("denilsonpfus/apache:${env.BUILD_NUMBER}")
@@ -29,10 +28,10 @@ node {
 
     stage ('Launch docker containers') {
       try {
-      // Lauch Jekyll container here
-           sh "docker run -v /home/denferreira/denilson_blog:/data --name denilson_blog${env.BUILD_NUMBER} denilsonpfus/jekyll" 
+      // Lauch website container here
+           sh "docker run -v /home/denferreira/new_site:/data --name new_site${env.BUILD_NUMBER} denilsonpfus/website” 
       // Lauch Apache container here
-           sh "docker run -d -P --volumes-from denilson_blog${env.BUILD_NUMBER} --name apache_server${env.BUILD_NUMBER} denilsonpfus/apache"
+           sh "docker run -d -P --volumes-from new_site${env.BUILD_NUMBER} --name apache_server${env.BUILD_NUMBER} denilsonpfus/apache"
       
       } catch (error) {
       } finally {
@@ -45,10 +44,10 @@ node {
 /*    
     stage ('Test application') {
       try {
-      // Start Jekyll container here
-           sh "docker run -v /home/denferreira/denilson_blog:/data --name denilson_blog${env.BUILD_NUMBER} denilsonpfus/jekyll" 
+      // Start website container here
+           sh "docker run -v /home/denferreira/new_site:/data --name new_site${env.BUILD_NUMBER} denilsonpfus/website" 
       // Start Apache container here
-           sh "docker run -d -P --volumes-from denilson_blog${env.BUILD_NUMBER} --name apache_server${env.BUILD_NUMBER} denilsonpfus/apache" 
+           sh "docker run -d -P --volumes-from new_site${env.BUILD_NUMBER} --name apache_server${env.BUILD_NUMBER} denilsonpfus/apache" 
       
       } catch (error) {
       } finally {
