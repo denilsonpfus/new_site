@@ -9,7 +9,7 @@ node {
 
     stage('Build docker images') {
   
-      dir(‘website’) {
+      dir('website') {
         app = docker.build("denilsonpfus/website:${env.BUILD_NUMBER}")
       }
       dir('apache') {
