@@ -7,5 +7,5 @@ ADD  https://github.com/denilsonpfus/new_site/blob/master/Index.html ./var/www/h
 
 VOLUME /data
 VOLUME /var/www/html
-WORKDIR /data
+WORKDIR /var/www/html
 
