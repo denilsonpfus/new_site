@@ -18,7 +18,7 @@ node {
     }
         
     stage('Test docker images') {
-        /* Ideally, we would run a test framework against our image. */
+        /* Ideally, we would run a test framework against our image.*/
 
         app.inside {
             sh 'echo "Tests passed"'
@@ -28,7 +28,7 @@ node {
     stage ('Launch docker containers') {
       try {
       // Lauch website container here
-          sh "docker run -v /home/denferreira/new_site:/var/www/html --name new_site${env.BUILD_NUMBER} denilsonpfus/website:${env.BUILD_NUMBER}" 
+          sh "docker run -v /home/denferreira/new_site/website/Index.html:/var/www/html --name new_site${env.BUILD_NUMBER} denilsonpfus/website:${env.BUILD_NUMBER}" 
       // Lauch Apache container here
           sh "docker run -d -P --volumes-from new_site${env.BUILD_NUMBER} --name apache_server${env.BUILD_NUMBER} denilsonpfus/apache_server:${env.BUILD_NUMBER}"
       
